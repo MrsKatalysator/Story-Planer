@@ -28,6 +28,7 @@ https://story-planer.netlify.app/
 ## 🐞 Bug-fix
 
 Nach dem Exportieren einer Datei werden neue Seiten als Unterseite angelegt. Ich arbeite dran!
+--> inzwischen debugged, code muss aber noch bei github ergänzt werden
 
 ## 📄 Lizenz 
 © 2026 Alix Müller
