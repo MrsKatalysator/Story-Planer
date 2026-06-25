@@ -24,3 +24,5 @@ https://story-planer.netlify.app/
 
 ## 📄 Lizenz 
 © 2026 Alix Müller
+
+<img width="1916" height="1038" alt="Story Planer" src="https://github.com/user-attachments/assets/67c30e5e-74c3-4902-babb-c1b075ea6d1d" />
