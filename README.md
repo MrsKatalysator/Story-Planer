@@ -1,7 +1,6 @@
 # 📖 Story Planer
 
 Eine Web-App zum Planen und Verwalten von Geschichten, Romanen und anderen kreativen Werken. 
-Es gibt noch einen Bug, an dessen Behebung ich arbeite: Nach dem Exportieren einer Datei werden neue Seiten als Unterseite angelegt. Ich arbeite dran!
 
 ## ✨ Features
 
@@ -25,6 +24,10 @@ Gebaut mit KI-assistierendem workflow (OWL by ZOO).
 ## Link
 
 https://story-planer.netlify.app/
+
+## geplanter Bug-fix
+
+Nach dem Exportieren einer Datei werden neue Seiten als Unterseite angelegt. Ich arbeite dran!
 
 ## 📄 Lizenz 
 © 2026 Alix Müller
