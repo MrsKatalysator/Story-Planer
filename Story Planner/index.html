@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Story Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1 class="sidebar-title">📖 Story Planner</h1>
+      <button class="btn btn-sm" id="new-section-btn" title="Neuer Bereich">+ Bereich</button>
+    </div>
+    <nav class="sidebar-nav" id="sections-nav"></nav>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main">
+    <div class="toolbar">
+      <button class="btn btn-sm active" data-view="cards" title="Karten-Ansicht">▦ Karten</button>
+      <button class="btn btn-sm" data-view="list" title="Listen-Ansicht">☰ Liste</button>
+      <button class="btn btn-sm" id="new-page-btn" title="Neue Seite">+ Seite</button>
+      <button class="btn btn-sm" id="edit-mode-btn" title="Bearbeiten-Modus">✏️</button>
+      <button class="btn btn-sm" id="overview-btn" title="Alle Seiten">📋</button>
+      <div class="toolbar-spacer"></div>
+      <button class="btn btn-sm btn-danger" id="reset-btn" title="Alle Daten löschen">🗑️</button>
+      <div class="toolbar-dropdown">
+        <button class="btn btn-sm" id="toolbar-more-btn" title="Mehr">⋯</button>
+        <div class="toolbar-dropdown-menu" id="toolbar-dropdown-menu">
+          <button class="toolbar-dropdown-item" id="export-btn">📤 Export</button>
+          <button class="toolbar-dropdown-item" id="import-btn">📥 Import</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+
+      <div class="section-header">
+        <h2 class="section-title" id="current-section-title">Übersicht</h2>
+        <span class="section-count" id="section-count"></span>
+      </div>
+
+      <div class="cards-grid" id="cards-grid"></div>
+    </div>
+  </main>
+
+  <!-- ========== SEITE ANZEIGEN / BEARBEITEN ========== -->
+  <div class="page-overlay" id="page-overlay">
+    <div class="page-modal">
+      <div class="page-modal__header">
+        <input type="text" class="page-title-input" id="page-title-input" placeholder="Seitentitel...">
+        <div class="page-modal__actions">
+          <button class="btn btn-sm" id="page-edit-btn">✏️ Bearbeiten</button>
+          <button class="btn btn-sm btn-danger" id="page-delete-btn">🗑️ Löschen</button>
+          <button class="btn btn-sm" id="page-close-btn">✕</button>
+        </div>
+      </div>
+      <div class="page-modal__body">
+        <div class="page-images" id="page-images"></div>
+        <div class="image-upload-bar">
+          <label class="btn btn-sm btn-outline" for="image-upload-input">
+            🖼️ Bild hinzufügen
+          </label>
+          <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+        </div>
+        <div class="page-content-display" id="page-content-display"></div>
+        <div class="editor-toolbar">
+          <button type="button" class="editor-toolbar__btn" data-format="bold" title="Fett (Ctrl+B)"><b>F</b></button>
+          <button type="button" class="editor-toolbar__btn" data-format="italic" title="Kursiv (Ctrl+I)"><i>K</i></button>
+          <button type="button" class="editor-toolbar__btn" data-format="underline" title="Unterstrichen (Ctrl+U)"><u>U</u></button>
+          <span class="editor-toolbar__sep"></span>
+          <button type="button" class="editor-toolbar__btn" id="btn-list" data-format="ul" title="Liste">☰</button>
+          <button type="button" class="editor-toolbar__btn" data-format="link" title="Verlinkung einfügen">🔗</button>
+          <button type="button" class="editor-toolbar__btn btn-text-reset" id="btn-reset" title="Alles löschen" style="margin-left: auto; opacity: 0.5; font-size: 0.75rem;">✕</button>
+        </div>
+<div class="page-content-editor" id="page-content-editor" contenteditable="true" placeholder="Schreibe deine Notizen hier... (Tipp: [[Seitenname]] verlinkt zu einer anderen Seite)"></div>
+        <p class="editor-hint">💡 Tipp: <code>[[Seitenname]]</code> erstellt automatisch einen Link zu einer anderen Seite.</p>
+      </div>
+      <div class="page-modal__footer">
+        <span class="page-meta" id="page-meta"></span>
+        <button class="btn btn-primary btn-sm" id="page-save-btn">💾 Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NEUE SEKTION MODAL ========== -->
+  <div class="modal" id="section-modal">
+    <div class="modal-content">
+      <h3>Neuer Bereich</h3>
+      <div class="form-group">
+        <label for="section-name">Name</label>
+        <input type="text" id="section-name" class="input" placeholder="z.B. Charaktere, Welten...">
+      </div>
+      <div class="form-group">
+        <label for="section-icon">Emoji</label>
+        <input type="text" id="section-icon" class="input" placeholder="👤" maxlength="2">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="section-cancel-btn">Abbrechen</button>
+        <button class="btn btn-primary" id="section-create-btn">Erstellen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NEUE SEITE MODAL ========== -->
+  <div class="modal" id="page-create-modal">
+    <div class="modal-content">
+      <h3>Neue Seite</h3>
+      <div class="form-group">
+        <label for="new-page-title">Titel</label>
+        <input type="text" id="new-page-title" class="input" placeholder="Seitentitel...">
+      </div>
+      <div class="form-group">
+        <label for="new-page-section">Bereich</label>
+        <select id="new-page-section" class="select"></select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="page-create-cancel-btn">Abbrechen</button>
+        <button class="btn btn-primary" id="page-create-confirm-btn">Erstellen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== RESET CONFIRMATION MODAL ========== -->
+  <div class="modal" id="reset-modal">
+    <div class="modal-content">
+      <h3>⚠️ Wirklich alles löschen?</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+        Alle Bereiche, Seiten, Verlinkungen und Bilder werden <strong style="color: #f43f5e;">unwiderruflich gelöscht</strong>.
+        Diese Aktion kann nicht rückgängig gemacht werden.
+      </p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        Tipp: Exportiere zuerst deine Daten, falls du sie behalten möchtest.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="reset-cancel-btn">Abbrechen</button>
+        <button class="btn btn-danger" id="reset-confirm-btn">🗑️ Ja, alles löschen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/storage.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/links.js"></script>
+  <script src="js/dragdrop.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
