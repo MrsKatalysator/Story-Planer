@@ -25,7 +25,7 @@ Gebaut mit KI-assistierendem workflow (OWL by ZOO).
 
 https://story-planer.netlify.app/
 
-## geplanter Bug-fix
+## 🐞 Bug-fix
 
 Nach dem Exportieren einer Datei werden neue Seiten als Unterseite angelegt. Ich arbeite dran!
 
