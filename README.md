@@ -1,6 +1,7 @@
 # 📖 Story Planer
 
 Eine Web-App zum Planen und Verwalten von Geschichten, Romanen und anderen kreativen Werken. 
+Es gibt noch einen Bug, an dessen Behebung ich arbeite: Nach dem Exportieren einer Datei werden neue Seiten als Unterseite angelegt. Ich arbeite dran!
 
 ## ✨ Features
 
