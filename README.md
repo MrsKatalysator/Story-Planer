@@ -21,7 +21,7 @@ Eine Web-App zum Planen und Verwalten von Geschichten, Romanen und anderen kreat
 
 Gebaut mit KI-assistierendem workflow (OWL by ZOO).
 
-## Link
+## 🔗 Link
 
 https://story-planer.netlify.app/
 
